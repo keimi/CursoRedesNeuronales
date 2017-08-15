@@ -1,4 +1,4 @@
-from perceptron import Perceptron
+from sigmoid_neuron import SigmoidNeuron
 from random import randint
 
 
@@ -25,7 +25,7 @@ class Line:
 
 
 def plot_coordinates():
-    per = Perceptron(1.0, 1.0, 1.0)
+    per = SigmoidNeuron(1.0, 1.0, 1.0)
     line = Line()
     line.m = -2.0
     line.n =10.0
@@ -62,7 +62,7 @@ def plot_learning_curve():
     lasterror=0
 
     for tr in range(0, 500):
-        per = Perceptron(1.0, 1.0, 1.0)
+        per = SigmoidNeuron(1.0, 1.0, 1.0)
         line = Line()
         line.m = -1.0
         line.n = 0.0
@@ -93,9 +93,11 @@ def plot_learning_curve():
         lasterror = sumErrors
         lasttr=tr
 
-plt.subplot(1, 2, 1)
+
+
+plt.subplot(1,2,1)
 plot_coordinates()
-plt.subplot(1, 2, 2)
+plt.subplot(1,2,2)
 plot_learning_curve()
 plt.show()
 

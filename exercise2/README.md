@@ -3,6 +3,8 @@
 
 # Execution commands
 
+### Execute training in perceptron
+
 ```
 
 python ./exercise2/raining_perceptron.py
