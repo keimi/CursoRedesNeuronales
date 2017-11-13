@@ -22,7 +22,7 @@ class NeuronNetwork:
 
     def add_layer(self, number_of_neurons):
         if np.size(self.layers) > 0:
-            self.layers.append(NeuronLayer(number_neurons=number_of_neurons, input_size=self.layers[-1].number_of_weights()))
+            self.layers.append(NeuronLayer(number_neurons=number_of_neurons, input_size=self.layers[-1].number_of_neurons()))
         else:
             self.layers.append(NeuronLayer(number_neurons=number_of_neurons, input_size=self.number_of_inputs))
 
@@ -77,6 +77,26 @@ class NeuronNetwork:
                 s = s +'} b: ' + str(neuron.bias) + ' z: ' + str(neuron.z) +  ' o: ' + str(neuron.output) +  ' d:' + str(neuron.delta)  + '\n'
             s =  s + '}\n'
         return s
+
+    def to_list(self):
+        ret = []
+        for layer in self.layers:
+            for neuron in layer.neurons:
+                vec = np.hstack((np.array(neuron.weights), neuron.bias))
+                ret.append(vec)
+                # if not ret.any():
+                #     ret = vec
+                # else:
+                #     ret =  np.vstack((ret, vec))
+
+        return ret
+
+    def from_list(self, array):
+        prev_neurons = 0
+        for index_layer, layer in enumerate(self.layers):
+            for index_neuron, neuron in enumerate(layer.neurons):
+                neuron.from_nparray(array[prev_neurons])
+                prev_neurons+=1
 
 
 

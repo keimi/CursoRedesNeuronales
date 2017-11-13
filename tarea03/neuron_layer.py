@@ -1,5 +1,6 @@
 from sigmoid_neuron import SigmoidNeuron
 import numpy as np
+import random
 
 class InputError(Exception):
     def __init__(self, message, errors):
@@ -15,11 +16,11 @@ class NeuronLayer:
     def __init__(self, number_neurons=0, input_size=0):
         self.neurons = []
         for i in range(number_neurons):
-            self.neurons.append(SigmoidNeuron(w=np.random.rand(input_size)))
+            self.neurons.append(SigmoidNeuron(w=np.random.rand(input_size)*2.0 - 1.0, bias=random.uniform(-1.0, 1.0)))
 
     def set_neurons(self, number_neurons=0, input_size=0):
         for i in range(number_neurons):
-            self.neurons.append(SigmoidNeuron(w=np.random.rand(input_size)))
+            self.neurons.append(SigmoidNeuron(w=np.random.rand(input_size)*2.0 - 1.0, bias=random.uniform(-1.0, 1.0)))
 
     def feed(self, inputs):
         if np.size(self.neurons) < 1:
@@ -28,7 +29,7 @@ class NeuronLayer:
             # Change number of neurons weights
             if np.size(inputs) != self.number_of_weights():
                 for neuron in self.neurons:
-                    neuron.set_weights(np.random.rand(np.size(inputs)))
+                    neuron.set_weights(np.random.rand(np.size(inputs))*2.0 - 1.0)
 
         output = np.empty(0)
         for neuron in self.neurons:

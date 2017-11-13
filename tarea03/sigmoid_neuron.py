@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class SigmoidNeuron:
 
     def __init__(self, w=np.empty(0), bias=0.5):
@@ -30,6 +31,10 @@ class SigmoidNeuron:
     def update_weights(self, inputs, learning_rate=0.05):
         self.weights = self.weights + (learning_rate*self.delta*inputs)
         self.bias += learning_rate*self.delta
+
+    def from_nparray(self, array):
+        self.weights = array[0:array.size-1]
+        self.bias = array[-1]
 
 
 
